@@ -1,17 +1,30 @@
-from flask_socketio import Namespace, emit
+from flask_socketio import send, emit, join_room
 from src import socketio
+from flask import g, request
+
+# connected_user_ids = []
+sids = []
 
 
-class MyCustomNamespace(Namespace):
-    def on_connect(self):
-        print("connnnnnnneeeeccttt **********")
-        pass
-
-    def on_disconnect(self):
-        pass
-
-    def on_my_event(self, data):
-        emit('my_response', data)
+# CONNECT
+@socketio.on('connect')
+def connect():
+    print(request.sid, "errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrooom")
+    sids.append(request.sid)
+    print(request.sid, "errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrooom")
+    print('connect ****************')
 
 
-socketio.on_namespace(MyCustomNamespace('/'))
+# DISCONNECT
+@socketio.on('disconnect')
+def disconnect():
+    print('disconnect ***************')
+
+
+# CREATE FRIEND REQUEST
+# @auth_middleware.check_authorize
+def send_data(data):
+    # pass
+    emit('message', data, namespace=False, broadcast=True)
+
+
