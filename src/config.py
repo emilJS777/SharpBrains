@@ -11,7 +11,8 @@ from flask_socketio import SocketIO
 app = Flask(__name__)
 api = Api(app)
 app.config['SECRET_KEY'] = 'KS3239@#t!'
-socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*")
+# socketio.init_app(app, cors_allowed_origins="*")
 
 # CONNECT TO DATABASE CONFIG
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:<password>@localhost/SharpBrains_db"

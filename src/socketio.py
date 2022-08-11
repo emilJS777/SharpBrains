@@ -5,6 +5,7 @@ from flask import g, request
 # connected_user_ids = []
 sids = []
 
+
 # CONNECT
 @socketio.on('connect')
 def connect():
@@ -23,4 +24,4 @@ def disconnect():
 # @auth_middleware.check_authorize
 def send_data(data):
     # pass
-    emit('stationData', data, namespace=False, broadcast=True)
+    emit('message', data, namespace=False, broadcast=True)
