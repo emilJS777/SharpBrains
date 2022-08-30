@@ -13,7 +13,7 @@ class AuthService(Service, Repository):
         self.__user_repository = user_repository
 
     def login(self, body: dict) -> dict:
-        user = self.__user_repository.get_by_name(name=body['name'])
+        user = self.__user_repository.get_by_email_address(body['email_address'])
 
         if not user or not check_password_hash(user.password_hash, body['password']):
             return self.response_invalid_login()
@@ -31,4 +31,11 @@ class AuthService(Service, Repository):
         return self.response_invalid_login()
 
     def get_profile(self) -> dict:
-        return self.response_ok(self.get_dict_items(g.user))
+        return self.response_ok({
+            "email_address": g.user.email_address,
+            "first_name": g.user.first_name,
+            "last_name": g.user.last_name,
+            "role": self.get_dict_items(g.user.role) if g.user.role else None,
+            "permissions": self.get_array_items(g.user.role.permissions) if g.user.role else [],
+            "projects": self.get_array_items(g.user.projects)
+        })

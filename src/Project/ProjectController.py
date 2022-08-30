@@ -6,6 +6,7 @@ from flask_expects_json import expects_json
 from .ProjectValidator import project_schema
 from src.Auth.AuthMiddleware import AuthMiddleware
 from src.ProjectStatus.ProjectStatusRepository import ProjectStatusRepository
+from src.Permission.PermissionMiddleware import PermissionMiddleware
 
 
 class ProjectController(Controller):
@@ -13,21 +14,25 @@ class ProjectController(Controller):
 
     @expects_json(project_schema)
     @AuthMiddleware.check_authorize
+    @PermissionMiddleware.check_permission("project_edit")
     def post(self) -> dict:
         res: dict = self.project_service.create(self.request.get_json())
         return res
 
     @expects_json(project_schema)
     @AuthMiddleware.check_authorize
+    @PermissionMiddleware.check_permission("project_edit")
     def put(self) -> dict:
         res: dict = self.project_service.update(project_id=self.id, body=self.request.get_json())
         return res
 
     @AuthMiddleware.check_authorize
+    @PermissionMiddleware.check_permission("project_edit")
     def delete(self) -> dict:
         res: dict = self.project_service.delete(self.id)
         return res
 
+    @AuthMiddleware.check_authorize
     def get(self) -> dict:
         if self.id:
             res: dict = self.project_service.get_by_id(self.id)

@@ -5,7 +5,7 @@ from .ProjectModel import Project
 class IProjectRepo(ABC):
 
     @abstractmethod
-    def create(self, body: dict):
+    def create(self, body: dict) -> Project:
         pass
 
     @abstractmethod
@@ -30,4 +30,10 @@ class IProjectRepo(ABC):
 
     @abstractmethod
     def get_all(self, page: int, per_page: int, sphere_id: int or None, project_status_id: int or None):
+        pass
+
+    def delete_user_projects_by_user_id(self, user_id: int):
+        pass
+
+    def delete_user_projects_by_project_id(self, project_id: int):
         pass

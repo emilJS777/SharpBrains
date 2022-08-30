@@ -5,21 +5,28 @@ from src.UserImage.UserImageModel import UserImage
 
 
 class UserRepository(IUserRepo):
-    def create(self, body: dict):
+    def create(self, body: dict, projects: list, ticket: str) -> User:
         user: User = User()
-        user.name = body['name']
-        user.password_hash = generate_password_hash(body['password'])
+        user.ticket = ticket
         user.email_address = body['email_address']
         user.first_name = body['first_name'].title()
         user.last_name = body['last_name'].title()
+        user.role_id = body['role_id']
+        user.projects = projects
         user.save_db()
+        return user
 
-    def update(self, user: User, body: dict):
-        user.name = body['name']
-        user.password_hash = generate_password_hash(body['password'])
+    def update(self, user: User, projects: list, body: dict):
         user.email_address = body['email_address']
         user.first_name = body['first_name'].title()
         user.last_name = body['last_name'].title()
+        user.role_id = body['role_id']
+        user.projects = projects
+        user.update_db()
+
+    def registration(self, user: User, body: dict):
+        user.password_hash = generate_password_hash(body['password'])
+        user.ticket = None
         user.update_db()
 
     def delete(self, user: User):
@@ -33,9 +40,13 @@ class UserRepository(IUserRepo):
         user = User.query.filter_by(id=user_id).first()
         return user
 
-    def get_by_name(self, name: str):
-        user = User.query.filter_by(name=name).first()
+    def get_by_ticket(self, ticket: str) -> User:
+        user: User = User.query.filter_by(ticket=ticket).first()
         return user
+
+    # def get_by_name(self, name: str):
+    #     user = User.query.filter_by(name=name).first()
+    #     return user
 
     def get_by_email_address(self, email_address: str):
         user = User.query.filter_by(email_address=email_address).first()

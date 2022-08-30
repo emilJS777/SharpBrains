@@ -1,12 +1,11 @@
 from src.__Parents.Service import Service
 from .IUserImageRepo import IUserImageRepo
-from datetime import datetime
 from src import app
-import os
 from ..__Parents.Repository import Repository
+from ..__Parents.Image import Image
 
 
-class UserImageService(Service, Repository):
+class UserImageService(Service, Image, Repository):
     def __init__(self, user_image_repository: IUserImageRepo):
         self.user_image_repository: IUserImageRepo = user_image_repository
 

@@ -6,7 +6,10 @@ from ..__Parents.Service import Service
 
 
 class ProjectService(Service, Repository):
-    def __init__(self, project_repository: IProjectRepo, sphere_repository: ISphereRepo, project_status_repository: IProjectStatusRepo):
+    def __init__(self,
+                 project_repository: IProjectRepo,
+                 sphere_repository: ISphereRepo,
+                 project_status_repository: IProjectStatusRepo):
         self.project_repository: IProjectRepo = project_repository
         self.sphere_repository: ISphereRepo = sphere_repository
         self.project_status_repository: IProjectStatusRepo = project_status_repository
@@ -47,6 +50,7 @@ class ProjectService(Service, Repository):
         if not project:
             return self.response_not_found('project not found')
 
+        self.project_repository.delete_user_projects_by_project_id(project_id)
         self.project_repository.delete(project)
         return self.response_deleted('project successfully deleted')
 

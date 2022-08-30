@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, time
 
 
 class Repository:
@@ -18,7 +18,8 @@ class Repository:
                         and not type(value) == bool\
                         and not type(value) == list\
                         and not type(value) == date\
-                        and not type(value) == datetime:
+                        and not type(value) == datetime\
+                        and not type(value) == time:
                     dict_item[key] = Repository.get_dict_items(value)
                 else:
                     dict_item[key] = value

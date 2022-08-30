@@ -9,6 +9,9 @@ from .ProjectStatus.ProjectStatusController import ProjectStatusController
 from .Meeting.MeetingController import MeetingController
 from .ChatMessage.Chat.ChatController import ChatController
 from .ChatMessage.Message.MessageController import MessageController
+from .AboutUs.AboutUsController import AboutUsController
+from .File.FileController import FileController
+from .Role.RoleController import RoleController
 
 api.add_resource(AuthController, "/auth")
 api.add_resource(UserController, "/user")
@@ -20,3 +23,6 @@ api.add_resource(UserImageController, "/user_image")
 api.add_resource(MeetingController, "/meeting")
 api.add_resource(ChatController, "/chat")
 api.add_resource(MessageController, "/message")
+api.add_resource(AboutUsController, "/about_us")
+api.add_resource(FileController, "/file")
+api.add_resource(RoleController, "/role")

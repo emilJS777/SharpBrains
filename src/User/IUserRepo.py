@@ -5,11 +5,15 @@ from .UserModel import User
 class IUserRepo(ABC):
 
     @abstractmethod
-    def create(self, body: dict):
+    def create(self, body: dict, projects: list, ticket: str):
         pass
 
     @abstractmethod
-    def update(self, user: User, body: dict):
+    def update(self, user: User, projects: list, body: dict) -> User:
+        pass
+
+    @abstractmethod
+    def registration(self, user: User, body: dict):
         pass
 
     @abstractmethod
@@ -21,7 +25,7 @@ class IUserRepo(ABC):
         pass
 
     @abstractmethod
-    def get_by_name(self, name: str):
+    def get_by_ticket(self, ticket: str) -> User:
         pass
 
     @abstractmethod

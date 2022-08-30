@@ -1,10 +1,11 @@
 from .IImageRepo import IImageRepo
 from ..__Parents.Repository import Repository
 from ..__Parents.Service import Service
+from ..__Parents.Image import Image
 from src import app
 
 
-class ImageService(Service, Repository):
+class ImageService(Service, Image, Repository):
 
     def __init__(self, image_repository: IImageRepo):
         self.image_repository: IImageRepo = image_repository

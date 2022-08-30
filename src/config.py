@@ -39,6 +39,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app, supports_credentials=True)
 
 # FILES
+app.config["FILE_PATH"] = 'files/file'
 app.config["IMAGE_PATH"] = 'files/images'
 app.config["USER_IMAGE_PATH"] = 'files/user_images'
 

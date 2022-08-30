@@ -1,28 +1,21 @@
 from flask import make_response, jsonify
-from src import app
-from datetime import datetime
-import os, base64
+import string, random
 
 
 class Service:
-    # IMAGE LOGIC ***
     @staticmethod
-    def get_encode_image(image_path, dir_path):
-        with open(os.path.join(dir_path, image_path), 'rb') as binary_file:
-            base64_encoded_data = base64.b64encode(binary_file.read())
-            return str(base64_encoded_data.decode('utf-8'))
+    def generate_ticket_code(length=15, uppercase=True, lowercase=True, numbers=True):
+        ticket_code = ''
 
-    @staticmethod
-    def save_image(image_path: str, image):
-        filename = f"{datetime.utcnow().strftime('%B:%d:%Y:%H:%M:%S')}"
-        image.save(os.path.join(image_path, filename))
-        return filename
+        if uppercase:
+            ticket_code += string.ascii_uppercase
+        if lowercase:
+            ticket_code += string.ascii_lowercase
+        if numbers:
+            ticket_code += string.digits
 
-    @staticmethod
-    def delete_image(image_path, dir_path):
-        os.remove(dir_path + '/' + image_path)
+        return ''.join(random.choice(ticket_code) for i in range(length))
 
-    # RESPONSES ***
     @staticmethod
     def response(success, obj, status_code) -> make_response:
         return make_response(jsonify(success=success, obj=obj), status_code)

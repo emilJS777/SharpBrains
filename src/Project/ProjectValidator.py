@@ -6,6 +6,7 @@ project_schema = {
         "sphere_id": {"type": "number"},
         # "image_id": {"type": "number"},
         "project_status_id": {"type": "number"},
+        "progress": {"type": "number", "minimum": 0, "maximum": 100},
       },
     "required": ["title"]
 }
