@@ -44,5 +44,5 @@ class Initializer(Service):
         user = self.user_repository.get_by_email_address(self.user['email_address'])
         if not user:
             self.user['role_id'] = self.role_repository.get_by_name(self.role['name']).id
-            user = self.user_repository.create(body=self.user, ticket=self.generate_ticket_code(), project_permissions=[])
+            user = self.user_repository.create(body=self.user, ticket=self.generate_ticket_code(), projects=[])
             print(f"new admin user created, ticket={user.ticket}")
