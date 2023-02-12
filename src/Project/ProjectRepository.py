@@ -34,8 +34,8 @@ class ProjectRepository(IProjectRepo):
 
         project.owner_name = body['owner_name']
         project.email_address = body['email_address']
-        project.start_date = body['start_date']
-        project.end_date = body['end_date']
+        project.start_date = body['start_date'].split("T")[0]
+        project.end_date = body['end_date'].split("T")[0]
         project.assigned_from = body['assigned_from']
 
         project.update_db()
