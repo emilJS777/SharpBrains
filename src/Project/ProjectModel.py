@@ -21,4 +21,10 @@ class Project(Model, db.Model):
 
     progress = db.Column(db.Integer, default=0)
 
+    owner_name = db.Column(db.String(120))
+    email_address = db.Column(db.String(120))
+    start_date = db.Column(db.Date)
+    end_date = db.Column(db.Date)
+    assigned_from = db.Column(db.String(120))
+
     users = relationship("User", secondary="user_project", backref=db.backref('Project'))

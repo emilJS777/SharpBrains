@@ -13,6 +13,13 @@ class ProjectRepository(IProjectRepo):
         project.image_id = body['image_id']
         project.project_status_id = body['project_status_id']
         project.progress = body['progress']
+
+        project.owner_name = body['owner_name']
+        project.email_address = body['email_address']
+        project.start_date = body['start_date'].split("T")[0]
+        project.end_date = body['end_date'].split("T")[0]
+        project.assigned_from = body['assigned_from']
+
         project.users = [g.user]
         project.save_db()
         return project
@@ -24,6 +31,13 @@ class ProjectRepository(IProjectRepo):
         project.image_id = body['image_id']
         project.project_status_id = body['project_status_id']
         project.progress = body['progress']
+
+        project.owner_name = body['owner_name']
+        project.email_address = body['email_address']
+        project.start_date = body['start_date']
+        project.end_date = body['end_date']
+        project.assigned_from = body['assigned_from']
+
         project.update_db()
 
     def delete(self, project: Project):
