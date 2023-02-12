@@ -35,6 +35,7 @@ class AuthService(Service, Repository):
             "email_address": g.user.email_address,
             "first_name": g.user.first_name,
             "last_name": g.user.last_name,
+            "image" : self.get_encode_image(image_path=g.user.image.filename, dir_path=app.config["USER_IMAGE_PATH"]) if g.user.image else None,
             "role": self.get_dict_items(g.user.role) if g.user.role else None,
             "permissions": self.get_array_items(g.user.role.permissions) if g.user.role else [],
             "projects": self.get_array_items(g.user.projects)
