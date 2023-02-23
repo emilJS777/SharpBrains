@@ -5,6 +5,6 @@ from src.User.UserRepository import UserRepository
 from src.Role.RoleRepository import RoleRepository
 from src.Permission.PermissionRepository import PermissionRepository
 
-# Initializer(UserRepository(), RoleRepository(), PermissionRepository())
+Initializer(UserRepository(), RoleRepository(), PermissionRepository())
 if __name__ == '__main__':
     socketio.run(app, debug=True, port=5000)
